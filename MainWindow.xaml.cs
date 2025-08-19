@@ -1,7 +1,15 @@
 ﻿using System;
+<<<<<<< HEAD
 using System.Windows;
 using System.Windows.Controls;
 
+=======
+using System.Diagnostics.Contracts;
+using System.Windows;
+using System.Windows.Controls;
+
+
+>>>>>>> 9fa45e3c10010c3bd924abed766e3e123de6e4ba
 namespace BookMyTradie
 {
 

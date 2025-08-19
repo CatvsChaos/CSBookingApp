@@ -1,6 +1,16 @@
+<<<<<<< HEAD
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows;
+using System.Linq;
+using System.Diagnostics.Eventing.Reader;
+>>>>>>> 9fa45e3c10010c3bd924abed766e3e123de6e4ba
 
 
 

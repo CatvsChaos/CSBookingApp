@@ -1,6 +1,6 @@
 ﻿namespace BookMyTradie
 {
-    
+
     // Make accessible within the same assembly
     internal class Job
     {

@@ -148,7 +148,11 @@
             <!-- GRID ROW 2 : APP INFORMATION -->
 
             <Grid Grid.Row="2">
+<<<<<<< HEAD
                 <Label Content="Version 2025.08 NSOC" Padding="60,20,0,0" FontSize ="11" Foreground="LightGray"/>
+=======
+                <Label Content="Version 2025.05" Padding="60,20,0,0" FontSize ="11" Foreground="LightGray"/>
+>>>>>>> 9fa45e3c10010c3bd924abed766e3e123de6e4ba
             </Grid>
 
         </Grid>
