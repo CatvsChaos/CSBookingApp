@@ -1,7 +1,6 @@
 ﻿namespace BookMyTradie
 {
-    // New Git test
-
+    
     // Make accessible within the same assembly
     internal class Job
     {
