@@ -1,16 +1,6 @@
-<<<<<<< HEAD
-﻿using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows;
-=======
-﻿using System;
-using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
-using System.Linq;
-using System.Diagnostics.Eventing.Reader;
->>>>>>> 9fa45e3c10010c3bd924abed766e3e123de6e4ba
 
 
 
@@ -46,7 +36,7 @@ namespace BookMyTradie
         /// <returns>Either a matching item or default is returned.</returns>
 
         // [1] CHECK FOR DUPLICATES - SEARCH FOR MATCHING DATA IN LIST
-        public T DataMatched<T>(string searchString,
+        public static T DataMatched<T>(string searchString,
                                 List<T> List_Items,
                                 Func<T, string> itemSelector)
         {
@@ -60,7 +50,7 @@ namespace BookMyTradie
                     return item;
                 }
             }
-            return default;
+            return default!;
         }
 
 
@@ -80,8 +70,8 @@ namespace BookMyTradie
         /// <returns>Returns List_Items, filtered if a condition is provided.</returns>
 
         // [1] LISTBOX FILTER - LOAD ALL ITEMS
-        public List<T> ShowAll<T>(List<T> List_Items,
-                                  ListBox ListBox)
+        public static List<T> ShowAll<T>(List<T> List_Items,
+                                         ListBox ListBox)
         {
             // Refresh and update ListBox with Jobs List
             ListBox.ItemsSource = null;
@@ -90,9 +80,9 @@ namespace BookMyTradie
         }
 
         // [2] LISTBOX FILTER - LOAD ITEMS BASED ON CONDITIONS
-        public List<T> FilterList<T>(List<T> List_Items,
-                                     ListBox ListBox,
-                                     Func<T, bool> filterCondition)
+        public static List<T> FilterList<T>(List<T> List_Items,
+                                            ListBox ListBox,
+                                            Func<T, bool> filterCondition)
         {
             // Clear ListBox
             ListBox.ItemsSource = null;
@@ -138,26 +128,26 @@ namespace BookMyTradie
 
 
         // [1] JOB SELECTION - LOAD JOB INFO TO ALL FORMS
-        public void JobSelected(ListBox ListBox_Jobs,
-                                List<Contractor> List_Contractors,
+        public static void JobSelected(ListBox ListBox_Jobs,
+                                       List<Contractor> List_Contractors,
 
-                                Label Label_Assignment_Job,
-                                Label Label_Assignment_Contractor,
-                                DatePicker DatePicker_Assignment_DateStart,
-                                DatePicker DatePicker_Assignment_DateEnd,
-                                Label Label_Assignment_Cost,
+                                       Label Label_Assignment_Job,
+                                       Label Label_Assignment_Contractor,
+                                       DatePicker DatePicker_Assignment_DateStart,
+                                       DatePicker DatePicker_Assignment_DateEnd,
+                                       Label Label_Assignment_Cost,
 
-                                TextBox TextBox_Job_Address,
-                                Label Label_Job_DateStart,
-                                Label Label_Job_DateEnd,
-                                Label Label_Job_ContractorAssigned,
-                                Label Label_Job_Cost,
+                                       TextBox TextBox_Job_Address,
+                                       Label Label_Job_DateStart,
+                                       Label Label_Job_DateEnd,
+                                       Label Label_Job_ContractorAssigned,
+                                       Label Label_Job_Cost,
 
-                                TextBox TextBox_Contractor_BusinessName,
-                                Label Label_Contractor_DateStart,
-                                TextBox TextBox_Contractor_Rate,
-                                Label Label_Contractor_JobAssigned,
-                                TextBox TextBox_Contractor_PhoneEmail)
+                                       TextBox TextBox_Contractor_BusinessName,
+                                       Label Label_Contractor_DateStart,
+                                       TextBox TextBox_Contractor_Rate,
+                                       Label Label_Contractor_JobAssigned,
+                                       TextBox TextBox_Contractor_PhoneEmail)
         {
             // If a Job is selected in the ListBox
             if (ListBox_Jobs.SelectedItem != null)
@@ -169,47 +159,47 @@ namespace BookMyTradie
                 else
                 {
                     // Store selection
-                    Job job = ListBox_Jobs.SelectedItem as Job;
+                    Job? job = ListBox_Jobs.SelectedItem as Job;
 
                     // Load Job Form - with assigned/unassigned job data
-                    TextBox_Job_Address.Text = job.Address;
-                    Label_Job_DateStart.Content = job.DateStart;
-                    Label_Job_DateEnd.Content = job.DateEnd;
-                    Label_Job_ContractorAssigned.Content = job.ContractorAssigned;
-                    Label_Job_Cost.Content = job.Cost;
+                    TextBox_Job_Address.Text = job?.Address;
+                    Label_Job_DateStart.Content = job?.DateStart;
+                    Label_Job_DateEnd.Content = job?.DateEnd;
+                    Label_Job_ContractorAssigned.Content = job?.ContractorAssigned;
+                    Label_Job_Cost.Content = job?.Cost;
 
 
                     // If Job is assigned
-                    if (job.Status == "ASSIGNED")
+                    if (job?.Status == "ASSIGNED")
                     {
                         // Find and store corresponding contractor instance in Contractors List using ContractorAssigned
-                        Contractor matchedContractor = DataMatched(job.ContractorAssigned,
+                        Contractor matchedContractor = DataMatched(job?.ContractorAssigned!,
                                                                    List_Contractors,
-                                                                   contractor => contractor.BusinessName);
+                                                                   contractor => contractor?.BusinessName!);
 
                         // If there is a corresponding contractor instance
                         if (matchedContractor != null)
                         {
                             // Load Contractor Form - with assigned contractor data
-                            TextBox_Contractor_BusinessName.Text = job.ContractorAssigned;
+                            TextBox_Contractor_BusinessName.Text = job?.ContractorAssigned;
                             Label_Contractor_DateStart.Content = matchedContractor.DateStart;
-                            Label_Contractor_JobAssigned.Content = job.Address;
+                            Label_Contractor_JobAssigned.Content = job?.Address;
                             TextBox_Contractor_PhoneEmail.Text = matchedContractor.PhoneEmail;
                             TextBox_Contractor_Rate.Text = matchedContractor.Rate.ToString();
 
                             // Load Assignment Form - with assigned job and contractor data
-                            Label_Assignment_Job.Content = job.Address;
-                            Label_Assignment_Contractor.Content = job.ContractorAssigned;
-                            DatePicker_Assignment_DateStart.SelectedDate = DateTime.Parse(job.DateStart.ToString());
-                            DatePicker_Assignment_DateEnd.SelectedDate = DateTime.Parse(job.DateEnd.ToString());
-                            Label_Assignment_Cost.Content = job.Cost;
+                            Label_Assignment_Job.Content = job?.Address;
+                            Label_Assignment_Contractor.Content = job?.ContractorAssigned;
+                            DatePicker_Assignment_DateStart.SelectedDate = DateTime.Parse(job?.DateStart!.ToString()!);
+                            DatePicker_Assignment_DateEnd.SelectedDate = DateTime.Parse(job?.DateEnd!.ToString()!);
+                            Label_Assignment_Cost.Content = job?.Cost;
                         }
                     }
                     // If Job is unassigned
                     else
                     {
                         // Load Assignment Form - with unassigned job data
-                        Label_Assignment_Job.Content = job.Address;
+                        Label_Assignment_Job.Content = job?.Address;
                         DatePicker_Assignment_DateStart.SelectedDate = null;
                         DatePicker_Assignment_DateEnd.SelectedDate = null;
                         if (Label_Assignment_Contractor.Content == null)
@@ -247,40 +237,40 @@ namespace BookMyTradie
             if (ListBox_Contractors.SelectedItem != null)
             {
                 // Store selection
-                Contractor contractor = ListBox_Contractors.SelectedItem as Contractor;
+                Contractor? contractor = ListBox_Contractors.SelectedItem as Contractor;
 
                 // Load Contractor Form - with assigned/unassigned contractor data
-                TextBox_Contractor_BusinessName.Text = contractor.BusinessName;
-                Label_Contractor_DateStart.Content = contractor.DateStart;
-                TextBox_Contractor_Rate.Text = contractor.Rate.ToString();
-                Label_Contractor_JobAssigned.Content = contractor.JobAssigned;
-                TextBox_Contractor_PhoneEmail.Text = contractor.PhoneEmail;
+                TextBox_Contractor_BusinessName.Text = contractor?.BusinessName;
+                Label_Contractor_DateStart.Content = contractor?.DateStart;
+                TextBox_Contractor_Rate.Text = contractor?.Rate.ToString();
+                Label_Contractor_JobAssigned.Content = contractor?.JobAssigned;
+                TextBox_Contractor_PhoneEmail.Text = contractor?.PhoneEmail;
 
                 // If Contractor is assigned
-                if (contractor.Status == "ASSIGNED")
+                if (contractor?.Status == "ASSIGNED")
                 {
                     // Find and store corresponding Job instance in list using Job address
-                    Job matchedJob = DataMatched(contractor.JobAssigned,
+                    Job matchedJob = DataMatched(contractor?.JobAssigned!,
                                                     List_Jobs,
-                                                    job => job.Address);
+                                                    job => job?.Address!);
 
                     // If there is a corresponding job instance
                     if (matchedJob != null)
                     {
                         // Load Job Form - with assigned job data
                         TextBox_Job_Address.Text = matchedJob.Address;
-                        Label_Job_DateStart.Content = matchedJob.DateStart;
-                        Label_Job_DateEnd.Content = matchedJob.DateEnd;
-                        Label_Job_ContractorAssigned.Content = matchedJob.ContractorAssigned;
-                        Label_Job_Cost.Content = matchedJob.Cost;
+                        Label_Job_DateStart.Content = matchedJob?.DateStart;
+                        Label_Job_DateEnd.Content = matchedJob?.DateEnd;
+                        Label_Job_ContractorAssigned.Content = matchedJob?.ContractorAssigned;
+                        Label_Job_Cost.Content = matchedJob?.Cost;
 
                         // Load Assignment Form - with assigned job and contractor data
-                        Label_Assignment_Job.Content = matchedJob.Address;
-                        Label_Assignment_Contractor.Content = matchedJob.ContractorAssigned;
+                        Label_Assignment_Job.Content = matchedJob?.Address;
+                        Label_Assignment_Contractor.Content = matchedJob?.ContractorAssigned;
                         try
                         {
-                            DatePicker_Assignment_DateStart.SelectedDate = DateTime.Parse(matchedJob.DateStart.ToString());
-                            DatePicker_Assignment_DateEnd.SelectedDate = DateTime.Parse(matchedJob.DateEnd.ToString());
+                            DatePicker_Assignment_DateStart.SelectedDate = DateTime.Parse(matchedJob?.DateStart!.ToString()!);
+                            DatePicker_Assignment_DateEnd.SelectedDate = DateTime.Parse(matchedJob?.DateEnd!.ToString()!);
                         }
                         catch
                         {
@@ -288,15 +278,15 @@ namespace BookMyTradie
                                             "Use ADD button to revert contractor record.");
                         }
 
-                        Label_Assignment_Cost.Content = matchedJob.Cost;
+                        Label_Assignment_Cost.Content = matchedJob?.Cost;
                     }
                 }
                 // If Contractor is unassigned
                 else
                 {
                     // Load Assignment Form - with unassigned contractor data
-                    Label_Assignment_Contractor.Content = contractor.BusinessName;
-                    Label_Assignment_Cost.Content = contractor.Rate;
+                    Label_Assignment_Contractor.Content = contractor?.BusinessName;
+                    Label_Assignment_Cost.Content = contractor?.Rate;
                 }
             }
 
@@ -330,17 +320,17 @@ namespace BookMyTradie
         /// <param name="TextBox_Filter_MaxCost"></param>
 
         // [1] COST RANGE FILTER - UPDATE TEXTBLOCK
-        public void AutoFillMinMax(List<Job> List_Jobs,
-                                   List<Completed> List_Completed,
-                                   ListBox ListBox_Jobs,
-                                   ComboBox ComboBox_Jobs,
-                                   TextBlock TextBlock_Filter_DisplayRange)
+        public static void AutoFillMinMax(List<Job> List_Jobs,
+                                          List<Completed> List_Completed,
+                                          ListBox ListBox_Jobs,
+                                          ComboBox ComboBox_Jobs,
+                                          TextBlock TextBlock_Filter_DisplayRange)
         {
             // Assigned Jobs
             if (ComboBox_Jobs.SelectedItem.ToString() == "Assigned Jobs" && ListBox_Jobs.Items.Count > 0)
             {
                 // Filter out Assigned Jobs from Jobs List
-                var assignedJobs = List_Jobs.Where(job => job.Status == "ASSIGNED").ToList();
+                var assignedJobs = List_Jobs.Where(job => job?.Status == "ASSIGNED").ToList();
 
                 // ========== DEBUG ==============
                 //Console.WriteLine($"Total assigned jobs: {assignedJobs.Count}");
@@ -349,8 +339,8 @@ namespace BookMyTradie
                 // Loop through relevant list and find min and max cost.
                 if (assignedJobs.Any())
                 {
-                    var minCost = assignedJobs.Min(job => Convert.ToDouble(job.Cost));
-                    var maxCost = assignedJobs.Max(job => Convert.ToDouble(job.Cost));
+                    var minCost = assignedJobs.Min(job => Convert.ToDouble(job?.Cost));
+                    var maxCost = assignedJobs.Max(job => Convert.ToDouble(job?.Cost));
 
                     // ========== TEST ==============
                     //MessageBox.Show($"Range is between {minCost} and {maxCost}");
@@ -381,8 +371,8 @@ namespace BookMyTradie
         }
 
         // [2] COST RANGE FILTER - CLEAR TEXT
-        public void ClearCostRange(TextBox TextBox_Filter_MinCost,
-                                   TextBox TextBox_Filter_MaxCost)
+        public static void ClearCostRange(TextBox TextBox_Filter_MinCost,
+                                          TextBox TextBox_Filter_MaxCost)
         {
             TextBox_Filter_MinCost.Text = "Enter Min Cost";
             TextBox_Filter_MaxCost.Text = "Enter Max Cost";
@@ -434,13 +424,13 @@ namespace BookMyTradie
                     {
                         FilterList(List_Jobs,
                                    ListBox_Jobs,
-                                   item => double.Parse(item.Cost) >= minCost && double.Parse(item.Cost) <= maxCost);
+                                   item => double.Parse(item?.Cost!) >= minCost && double.Parse(item?.Cost!) <= maxCost);
 
                         // Store listbox items in temporary list
                         List<string> filteredList = new List<string>();
                         foreach (var item in ListBox_Jobs.Items)
                         {
-                            filteredList.Add(item.ToString());
+                            filteredList.Add(item?.ToString()!);
                         }
 
                         // Display any times showing in listbox in MessageBox report
@@ -460,13 +450,13 @@ namespace BookMyTradie
                     {
                         FilterList(List_Completed,
                                    ListBox_Jobs,
-                                   item => double.Parse(item.Cost) >= minCost && double.Parse(item.Cost) <= maxCost);
+                                   item => double.Parse(item?.Cost!) >= minCost && double.Parse(item?.Cost!) <= maxCost);
 
                         // Store list in temporary list
                         List<string> filteredList = new List<string>();
                         foreach (var item in ListBox_Jobs.Items)
                         {
-                            filteredList.Add(item.ToString());
+                            filteredList.Add(item?.ToString()!);
                         }
 
                         // Display any times showing in listbox in MessageBox report
@@ -529,10 +519,10 @@ namespace BookMyTradie
         /// <param name="List_Completed"></param>
 
         // [1] CALCULATE COST - CHECK FOR CORRECT DATES AND UPDATE FORMS
-        public void CalculateCost(DatePicker DatePicker_Assignment_DateStart,
-                                  DatePicker DatePicker_Assignment_DateEnd,
-                                  Label Label_Assignment_Cost,
-                                  TextBox TextBox_Contractor_Rate)
+        public static void CalculateCost(DatePicker DatePicker_Assignment_DateStart,
+                                         DatePicker DatePicker_Assignment_DateEnd,
+                                         Label Label_Assignment_Cost,
+                                         TextBox TextBox_Contractor_Rate)
         {
             if (DatePicker_Assignment_DateStart.SelectedDate == null ||
                 DatePicker_Assignment_DateEnd.SelectedDate == null) return;
@@ -609,13 +599,13 @@ namespace BookMyTradie
                 if (assignedJob.Address == Label_Assignment_Job.Content.ToString())
                 {
                     // Search for existing record using Address
-                    Job matchedJob = DataMatched(assignedJob.Address,
+                    Job matchedJob = DataMatched(assignedJob?.Address!,
                                                  List_Jobs,
-                                                 job => job.Address);
+                                                 job => job?.Address!);
 
                     // Ensure record is unique in Jobs List by replacing old instance with new
                     List_Jobs.Remove(matchedJob);
-                    List_Jobs.Add(assignedJob);
+                    List_Jobs.Add(assignedJob!);
 
                     // Refresh ListBox
                     ListBox_Jobs.ItemsSource = null;
@@ -687,13 +677,13 @@ namespace BookMyTradie
                 if (assignedContractor.BusinessName == Label_Assignment_Contractor.Content.ToString())
                 {
                     // Search for existing record using Business Name
-                    Contractor matchedContractor = DataMatched(assignedContractor.BusinessName,
+                    Contractor matchedContractor = DataMatched(assignedContractor?.BusinessName!,
                                                                List_Contractors,
-                                                               ontractor => ontractor.BusinessName);
+                                                               ontractor => ontractor?.BusinessName!);
 
                     // Ensure record is unique in Contractors List by replacing old instance with new
                     List_Contractors.Remove(matchedContractor);
-                    List_Contractors.Add(assignedContractor);
+                    List_Contractors.Add(assignedContractor!);
 
                     // Refresh ListBox
                     ListBox_Contractors.ItemsSource = null;
@@ -727,7 +717,7 @@ namespace BookMyTradie
         }
 
         // [4] CLEAR ASSIGNMENT FORM
-        public void ClearAssignmentForm(ListBox ListBox_Jobs,
+        public static void ClearAssignmentForm(ListBox ListBox_Jobs,
                                         ListBox ListBox_Contractors,
                                         Label Label_Assignment_Job,
                                         Label Label_Assignment_Contractor,
@@ -749,7 +739,7 @@ namespace BookMyTradie
 
 
         // [5] CREATE COMPLETED JOB RECORD AND RETURN CONTRACTOR AND JOB TO UNASSIGNED POOL
-        public void CompleteJob(List<Job> List_Jobs,
+        public static void CompleteJob(List<Job> List_Jobs,
                                 ListBox ListBox_Jobs,
                                 ComboBox ComboBox_Jobs,
 
@@ -766,10 +756,10 @@ namespace BookMyTradie
                                 Label Label_Assignment_Cost)
         {
             // Store selected job
-            Job job = ListBox_Jobs.SelectedItem as Job; // Correctly loads job
+            Job? job = ListBox_Jobs.SelectedItem as Job; // Correctly loads job
 
             // Ensure selected job is assigned
-            if (ListBox_Jobs.SelectedItem != null && job.Status == "ASSIGNED" && job.Status != "COMPLETED")
+            if (ListBox_Jobs.SelectedItem != null && job?.Status == "ASSIGNED" && job.Status != "COMPLETED")
             {
                 // Create completed job instance
                 Completed completedJob = new Completed
@@ -778,8 +768,8 @@ namespace BookMyTradie
                     Status = "COMPLETED",
                     // Use loaded values from Assignment Form
                     Address = Label_Assignment_Job.Content.ToString(),
-                    DateStart = DatePicker_Assignment_DateStart.SelectedDate.Value.ToString("dd-MM-yyyy"),
-                    DateEnd = DatePicker_Assignment_DateEnd.SelectedDate.Value.ToString("dd-MM-yyyy"),
+                    DateStart = DatePicker_Assignment_DateStart?.SelectedDate!.Value.ToString("dd-MM-yyyy"),
+                    DateEnd = DatePicker_Assignment_DateEnd?.SelectedDate!.Value.ToString("dd-MM-yyyy"),
                     ContractorAssigned = Label_Assignment_Contractor.Content.ToString(),
                     Cost = Label_Assignment_Cost.Content.ToString()
                 };
@@ -803,9 +793,9 @@ namespace BookMyTradie
 
                 // CONTRACTOR
                 // Find corresponding contractor instance in Contractors List using ContractorAssigned
-                Contractor matchedContractor = DataMatched(job.ContractorAssigned,
+                Contractor matchedContractor = DataMatched(job?.ContractorAssigned!,
                                                            List_Contractors,
-                                                           contractor => contractor.BusinessName);
+                                                           contractor => contractor?.BusinessName!);
 
                 // If there is an old record found
                 if (matchedContractor != null)
@@ -842,8 +832,8 @@ namespace BookMyTradie
                             ListBox_Contractors,
                             Label_Assignment_Job,
                             Label_Assignment_Contractor,
-                            DatePicker_Assignment_DateStart,
-                            DatePicker_Assignment_DateEnd,
+                            DatePicker_Assignment_DateStart!,
+                            DatePicker_Assignment_DateEnd!,
                             Label_Assignment_Cost);
         }
 
@@ -870,7 +860,7 @@ namespace BookMyTradie
         /// <param name="ListBox_Jobs"></param>
 
         // [1] ADD JOB
-        public void AddJob(TextBox TextBox_Job_Address,
+        public static void AddJob(TextBox TextBox_Job_Address,
                             Label Label_Job_DateStart,
                             Label Label_Job_DateEnd,
                             Label Label_Job_ContractorAssigned,
@@ -880,7 +870,7 @@ namespace BookMyTradie
                             ListBox ListBox_Contractors)
         {
             // Create new job instance
-            Job newJob = new Job
+            Job newJob = new()
             {
                 Status = null,
                 Address = TextBox_Job_Address.Text, // Take user input
@@ -895,7 +885,7 @@ namespace BookMyTradie
                 // Search for existing record using Address
                 Job matchedJob = DataMatched(newJob.Address,
                                              List_Jobs,
-                                             job => job.Address);
+                                             job => job?.Address!);
 
                 // Ensure record is unique in Jobs List by replacing old instance with new
                 List_Jobs.Remove(matchedJob);
@@ -917,7 +907,7 @@ namespace BookMyTradie
         }
 
         // [2] DELETE JOB
-        public void DeleteJob(Job selectedItem,
+        public static void DeleteJob(Job selectedItem,
                               TextBox TextBox_Job_Address,
                               Label Label_Job_DateStart,
                               Label Label_Job_DateEnd,
@@ -948,7 +938,7 @@ namespace BookMyTradie
         }
 
         // [3] CLEAR JOB FORM
-        public void ClearJobForm(ListBox ListBox_Jobs,
+        public static void ClearJobForm(ListBox ListBox_Jobs,
                                  ListBox ListBox_Contractors,
                                  TextBox TextBox_Job_Address,
                                  Label Label_Job_DateStart,
@@ -1034,7 +1024,7 @@ namespace BookMyTradie
                 // Search for existing record using Business Name
                 Contractor matchedContractor = DataMatched(newContractor.BusinessName,
                                              List_Contractors,
-                                             ontractor => ontractor.BusinessName);
+                                             contractor => contractor?.BusinessName!);
 
                 // Ensure record is unique in Contractors List by replacing old instance with new
                 List_Contractors.Remove(matchedContractor);
@@ -1056,7 +1046,7 @@ namespace BookMyTradie
         }
 
         // [2] DELETE CONTRACTOR
-        public void DeleteContractor(Contractor selectedItem,
+        public static void DeleteContractor(Contractor selectedItem,
                                     TextBox TextBox_Contractor_BusinessName,
                                     Label Label_Contractor_DateStart,
                                     TextBox TextBox_Contractor_Rate,
@@ -1087,7 +1077,7 @@ namespace BookMyTradie
         }
 
         // [3] CLEAR CONTRACTOR FORM
-        public void ClearContractorForm(ListBox ListBox_Jobs,
+        public static void ClearContractorForm(ListBox ListBox_Jobs,
                                         ListBox ListBox_Contactors,
                                         TextBox TextBox_Contractor_BusinessName,
                                         Label Label_Contractor_DateStart,

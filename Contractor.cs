@@ -12,12 +12,12 @@
         /// </summary>
 
         // CLASS DATA
-        public string Status { get; set; } // Status can be unassigned, assigned or completed
-        public string BusinessName { get; set; } // Takes user input
-        public string DateStart { get; set; } // Takes from Assignment Form
-        public double Rate { get; set; } // Takes user input
-        public string JobAssigned { get; set; } // Takes from Assignment Form
-        public string PhoneEmail { get; set; } // Takes user input
+        public string? Status { get; set; } // Status can be unassigned, assigned or completed
+        public string? BusinessName { get; set; } // Takes user input
+        public string? DateStart { get; set; } // Takes from Assignment Form
+        public double? Rate { get; set; } // Takes user input
+        public string? JobAssigned { get; set; } // Takes from Assignment Form
+        public string? PhoneEmail { get; set; } // Takes user input
 
 
         // DISPLAY

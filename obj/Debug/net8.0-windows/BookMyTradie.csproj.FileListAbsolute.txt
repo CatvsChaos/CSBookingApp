@@ -22,3 +22,4 @@ C:\Users\magic\source\repos\C#Projects\C#_BookingApp\BookMyTradie\obj\Debug\net8
 C:\Users\magic\source\repos\C#Projects\C#_BookingApp\BookMyTradie\obj\Debug\net8.0-windows\BookMyTradie.pdb
 C:\Users\magic\source\repos\C#Projects\C#_BookingApp\BookMyTradie\obj\Debug\net8.0-windows\BookMyTradie.genruntimeconfig.cache
 C:\Users\magic\source\repos\C#Projects\C#_BookingApp\BookMyTradie\obj\Debug\net8.0-windows\ref\BookMyTradie.dll
+C:\Users\magic\source\repos\C#Projects\C#_BookingApp\BookMyTradie\obj\Debug\net8.0-windows\BookMyTradie.sourcelink.json

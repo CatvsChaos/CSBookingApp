@@ -11,16 +11,16 @@
     internal class Completed : Job
     {
         // CLASS DATA
-        public new string Status { get; set; } // Set to Completed
-        public new string Address { get; set; }
-        public new string DateStart { get; set; }
-        public new string DateEnd { get; set; }
-        public new string ContractorAssigned { get; set; }
-        public new string Cost { get; set; }
+        public new string? Status { get; set; } // Set to Completed
+        public new string? Address { get; set; }
+        public new string? DateStart { get; set; }
+        public new string? DateEnd { get; set; }
+        public new string? ContractorAssigned { get; set; }
+        public new string? Cost { get; set; }
 
 
         // DISPLAY
-        public override string ToString()
+        public override string? ToString()
         {
             if (Status == "COMPLETED")
             {

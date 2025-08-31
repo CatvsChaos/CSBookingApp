@@ -12,16 +12,16 @@
         /// </summary>
 
         // CLASS DATA
-        public string Status { get; set; } // Status can be unassigned, assigned or completed
-        public string Address { get; set; } // Takes user input
-        public string DateStart { get; set; } // Takes from Assignment Form
-        public string DateEnd { get; set; } // Takes from Assignment Form
-        public string ContractorAssigned { get; set; } // Takes from Assignment Form
-        public string Cost { get; set; } // Takes from Assignment Form
+        public string? Status { get; set; } // Status can be unassigned, assigned or completed
+        public string? Address { get; set; } // Takes user input
+        public string? DateStart { get; set; } // Takes from Assignment Form
+        public string? DateEnd { get; set; } // Takes from Assignment Form
+        public string? ContractorAssigned { get; set; } // Takes from Assignment Form
+        public string? Cost { get; set; } // Takes from Assignment Form
 
 
         // DISPLAY
-        public override string ToString()
+        public override string? ToString()
         {
             if (Status == "ASSIGNED")
             {

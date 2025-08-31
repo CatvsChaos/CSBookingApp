@@ -1,9 +1,4 @@
-﻿using System;
-<<<<<<< HEAD
-using System.Windows;
-using System.Windows.Controls;
-using System.Diagnostics.Contracts;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace BookMyTradie
@@ -11,7 +6,7 @@ namespace BookMyTradie
 
     public partial class MainWindow : Window
     {
-        readonly RecruitmentSystem recruitmentSystem = new RecruitmentSystem();
+        readonly RecruitmentSystem recruitmentSystem = new ();
 
         // ======================== INITIALIZE MAIN WINDOW
         /// <summary>
@@ -65,7 +60,7 @@ namespace BookMyTradie
             {
                 try
                 {
-                    recruitmentSystem.CalculateCost(DatePicker_Assignment_DateStart,
+                    BookMyTradie.RecruitmentSystem.CalculateCost(DatePicker_Assignment_DateStart,
                                                     DatePicker_Assignment_DateEnd,
                                                     Label_Assignment_Cost,
                                                     TextBox_Contractor_Rate);
@@ -85,7 +80,7 @@ namespace BookMyTradie
             {
                 try
                 {
-                    recruitmentSystem.CalculateCost(DatePicker_Assignment_DateStart,
+                    BookMyTradie.RecruitmentSystem.CalculateCost(DatePicker_Assignment_DateStart,
                                                     DatePicker_Assignment_DateEnd,
                                                     Label_Assignment_Cost,
                                                     TextBox_Contractor_Rate);
@@ -149,7 +144,7 @@ namespace BookMyTradie
         {
             try
             {
-                recruitmentSystem.CompleteJob(recruitmentSystem.List_Jobs,
+                BookMyTradie.RecruitmentSystem.CompleteJob(recruitmentSystem.List_Jobs,
                                               ListBox_Jobs,
                                               ComboBox_Jobs,
 
@@ -175,7 +170,7 @@ namespace BookMyTradie
 
             if (ComboBox_Jobs.SelectedIndex == 3)
             {
-                recruitmentSystem.FilterList(recruitmentSystem.List_Completed,
+                BookMyTradie.RecruitmentSystem.FilterList(recruitmentSystem.List_Completed,
                                              ListBox_Jobs,
                                              item => item.Status == "COMPLETED");
             }
@@ -185,7 +180,7 @@ namespace BookMyTradie
 
             if (ComboBox_Contractors.SelectedIndex == 1)
             {
-                recruitmentSystem.FilterList(recruitmentSystem.List_Contractors,
+                BookMyTradie.RecruitmentSystem.FilterList(recruitmentSystem.List_Contractors,
                                              ListBox_Contractors,
                                              item => item.Status == null);
             }
@@ -194,7 +189,7 @@ namespace BookMyTradie
         // [D] BUTTON CLEAR
         private void Button_Assignment_Clear(object sender, RoutedEventArgs e)
         {
-            recruitmentSystem.ClearAssignmentForm(ListBox_Jobs,
+            BookMyTradie.RecruitmentSystem.ClearAssignmentForm(ListBox_Jobs,
                                                   ListBox_Contractors,
                                                   Label_Assignment_Job,
                                                   Label_Assignment_Contractor,
@@ -230,7 +225,7 @@ namespace BookMyTradie
         // BUTTON CLEAR COST FIITER
         private void Button_Filter_ClearCostRange(object sender, RoutedEventArgs e)
         {
-            recruitmentSystem.ClearCostRange(TextBox_Filter_MinCost,
+            BookMyTradie.RecruitmentSystem.ClearCostRange(TextBox_Filter_MinCost,
                                              TextBox_Filter_MaxCost);
         }
 
@@ -255,23 +250,23 @@ namespace BookMyTradie
             // If a new job instance has been created
             if (TextBox_Job_Address.Text != "Enter job address")
             {
-                recruitmentSystem.AddJob(TextBox_Job_Address,
-                                     Label_Job_DateStart,
-                                     Label_Job_DateEnd,
-                                     Label_Job_ContractorAssigned,
-                                     Label_Job_Cost,
-                                     recruitmentSystem.List_Jobs,
-                                     ListBox_Jobs,
-                                     ListBox_Contractors);
+                BookMyTradie.RecruitmentSystem.AddJob(TextBox_Job_Address,
+                                                      Label_Job_DateStart,
+                                                      Label_Job_DateEnd,
+                                                      Label_Job_ContractorAssigned,
+                                                      Label_Job_Cost,
+                                                      recruitmentSystem.List_Jobs,
+                                                      ListBox_Jobs,
+                                                      ListBox_Contractors);
 
                 // Change Jobs ComboBox Filter to Unassigned Jobs
                 ComboBox_Jobs.SelectedIndex = 1;
 
                 if (ComboBox_Jobs.SelectedIndex == 1)
                 {
-                    recruitmentSystem.FilterList(recruitmentSystem.List_Jobs,
-                                                 ListBox_Jobs,
-                                                 item => item.Status == null);
+                    BookMyTradie.RecruitmentSystem.FilterList(recruitmentSystem.List_Jobs,
+                                                              ListBox_Jobs,
+                                                              item => item.Status == null);
                 }
             }
         }
@@ -289,7 +284,7 @@ namespace BookMyTradie
                     Job selectedItem = (Job)ListBox_Jobs.SelectedItem;
 
                     // Call Delete Function [1]
-                    recruitmentSystem.DeleteJob(selectedItem,
+                    BookMyTradie.RecruitmentSystem.DeleteJob(selectedItem,
                                                 TextBox_Job_Address,
                                                 Label_Job_DateStart,
                                                 Label_Job_DateEnd,
@@ -308,7 +303,7 @@ namespace BookMyTradie
         // [C] BUTTON CLEAR JOB
         private void Button_Job_Clear(object sender, RoutedEventArgs e)
         {
-            recruitmentSystem.ClearJobForm(ListBox_Jobs,
+            BookMyTradie.RecruitmentSystem.ClearJobForm(ListBox_Jobs,
                                            ListBox_Contractors,
                                            TextBox_Job_Address,
                                            Label_Job_DateStart,
@@ -323,56 +318,56 @@ namespace BookMyTradie
             // No Filter - Show All
             if (ComboBox_Jobs.SelectedItem.ToString() == "All Jobs")
             {
-                recruitmentSystem.ShowAll(recruitmentSystem.List_Jobs,
-                                          ListBox_Jobs);
+                BookMyTradie.RecruitmentSystem.ShowAll(recruitmentSystem.List_Jobs,
+                                                       ListBox_Jobs);
 
-                recruitmentSystem.AutoFillMinMax(recruitmentSystem.List_Jobs,
-                                                 recruitmentSystem.List_Completed,
-                                                 ListBox_Jobs,
-                                                 ComboBox_Jobs,
-                                                 TextBlock_Filter_DisplayRange);
+                BookMyTradie.RecruitmentSystem.AutoFillMinMax(recruitmentSystem.List_Jobs,
+                                                              recruitmentSystem.List_Completed,
+                                                              ListBox_Jobs,
+                                                              ComboBox_Jobs,
+                                                              TextBlock_Filter_DisplayRange);
             }
 
             // Filter Unassigned Jobs
             if (ComboBox_Jobs.SelectedItem.ToString() == "Unassigned Jobs")
             {
-                recruitmentSystem.FilterList(recruitmentSystem.List_Jobs,
-                                             ListBox_Jobs,
-                                             item => item.Status == null);
+                BookMyTradie.RecruitmentSystem.FilterList(recruitmentSystem.List_Jobs,
+                                                          ListBox_Jobs,
+                                                          item => item.Status == null);
 
-                recruitmentSystem.AutoFillMinMax(recruitmentSystem.List_Jobs,
-                                                 recruitmentSystem.List_Completed,
-                                                 ListBox_Jobs,
-                                                 ComboBox_Jobs,
-                                                 TextBlock_Filter_DisplayRange);
+                BookMyTradie.RecruitmentSystem.AutoFillMinMax(recruitmentSystem.List_Jobs,
+                                                              recruitmentSystem.List_Completed,
+                                                              ListBox_Jobs,
+                                                              ComboBox_Jobs,
+                                                              TextBlock_Filter_DisplayRange);
             }
 
             // Filter Assigned Jobs
             if (ComboBox_Jobs.SelectedItem.ToString() == "Assigned Jobs")
             {
-                recruitmentSystem.FilterList(recruitmentSystem.List_Jobs,
-                                             ListBox_Jobs,
-                                             item => item.Status == "ASSIGNED");
+                BookMyTradie.RecruitmentSystem.FilterList(recruitmentSystem.List_Jobs,
+                                                          ListBox_Jobs,
+                                                          item => item.Status == "ASSIGNED");
 
-                recruitmentSystem.AutoFillMinMax(recruitmentSystem.List_Jobs,
-                                                 recruitmentSystem.List_Completed,
-                                                 ListBox_Jobs,
-                                                 ComboBox_Jobs,
-                                                 TextBlock_Filter_DisplayRange);
+                BookMyTradie.RecruitmentSystem.AutoFillMinMax(recruitmentSystem.List_Jobs,
+                                                              recruitmentSystem.List_Completed,
+                                                              ListBox_Jobs,
+                                                              ComboBox_Jobs,
+                                                              TextBlock_Filter_DisplayRange);
             }
 
             // Filter Completed Jobs
             if (ComboBox_Jobs.SelectedItem.ToString() == "Completed Jobs")
             {
-                recruitmentSystem.FilterList(recruitmentSystem.List_Completed,
-                                             ListBox_Jobs,
-                                             item => item.Status == "COMPLETED");
+                BookMyTradie.RecruitmentSystem.FilterList(recruitmentSystem.List_Completed,
+                                                          ListBox_Jobs,
+                                                          item => item.Status == "COMPLETED");
 
-                recruitmentSystem.AutoFillMinMax(recruitmentSystem.List_Jobs,
-                                                 recruitmentSystem.List_Completed,
-                                                 ListBox_Jobs,
-                                                 ComboBox_Jobs,
-                                                 TextBlock_Filter_DisplayRange);
+                BookMyTradie.RecruitmentSystem.AutoFillMinMax(recruitmentSystem.List_Jobs,
+                                                              recruitmentSystem.List_Completed,
+                                                              ListBox_Jobs,
+                                                              ComboBox_Jobs,
+                                                              TextBlock_Filter_DisplayRange);
             }
         }
 
@@ -381,7 +376,7 @@ namespace BookMyTradie
         {
 
             // Fill Job, Contractor and Assignment Forms - Function [3]
-            recruitmentSystem.JobSelected(ListBox_Jobs,
+            BookMyTradie.RecruitmentSystem.JobSelected(ListBox_Jobs,
                                           recruitmentSystem.List_Contractors,
 
                                           Label_Assignment_Job,
@@ -424,9 +419,9 @@ namespace BookMyTradie
             int firstCount = recruitmentSystem.List_Contractors.Count;
 
             // Check if the Contractor's BusinessName in the TextBox is already in the List
-            Contractor matchedContractor = recruitmentSystem.DataMatched(TextBox_Contractor_BusinessName.Text,
-                                                                         recruitmentSystem.List_Contractors,
-                                                                         contractor => contractor.BusinessName);
+            Contractor matchedContractor = BookMyTradie.RecruitmentSystem.DataMatched(TextBox_Contractor_BusinessName.Text,
+                                                                                      recruitmentSystem.List_Contractors,
+                                                                                      contractor => contractor?.BusinessName!);
 
             recruitmentSystem.AddContractor(TextBox_Contractor_BusinessName,
                                             Label_Contractor_DateStart,
@@ -444,9 +439,9 @@ namespace BookMyTradie
                 // Change Contractors ComboBox Filter to 1 - Unassigned Contractors
                 ComboBox_Contractors.SelectedIndex = 1;
 
-                recruitmentSystem.FilterList(recruitmentSystem.List_Contractors,
-                                             ListBox_Contractors,
-                                             item => item.Status == null);
+                BookMyTradie.RecruitmentSystem.FilterList(recruitmentSystem.List_Contractors,
+                                                          ListBox_Contractors,
+                                                          item => item.Status == null);
             }
             else if (matchedContractor != null)
             {
@@ -467,7 +462,7 @@ namespace BookMyTradie
                 try
                 {
                     // Call Delete Function [1]
-                    recruitmentSystem.DeleteContractor(selectedItem,
+                    BookMyTradie.RecruitmentSystem.DeleteContractor(selectedItem,
                                                        TextBox_Contractor_BusinessName,
                                                        Label_Contractor_DateStart,
                                                        TextBox_Contractor_Rate,
@@ -486,7 +481,7 @@ namespace BookMyTradie
         // [C] BUTTON CLEAR JOB
         private void Button_Contractor_Clear(object sender, RoutedEventArgs e)
         {
-            recruitmentSystem.ClearContractorForm(ListBox_Jobs,
+            BookMyTradie.RecruitmentSystem.ClearContractorForm(ListBox_Jobs,
                                                   ListBox_Contractors,
                                                   TextBox_Contractor_BusinessName,
                                                   Label_Contractor_DateStart,
@@ -501,14 +496,14 @@ namespace BookMyTradie
             // No Filter - Show All
             if (ComboBox_Contractors.SelectedItem.ToString() == "All Contractors")
             {
-                recruitmentSystem.ShowAll(recruitmentSystem.List_Contractors,
+                BookMyTradie.RecruitmentSystem.ShowAll(recruitmentSystem.List_Contractors,
                                           ListBox_Contractors);
             }
 
             // Filter Unassigned Jobs
             if (ComboBox_Contractors.SelectedItem.ToString() == "Unassigned Contractors")
             {
-                recruitmentSystem.FilterList(recruitmentSystem.List_Contractors,
+                BookMyTradie.RecruitmentSystem.FilterList(recruitmentSystem.List_Contractors,
                                              ListBox_Contractors,
                                              item => item.Status == null);
             }
@@ -516,7 +511,7 @@ namespace BookMyTradie
             // Filter Assigned Jobs
             if (ComboBox_Contractors.SelectedItem.ToString() == "Assigned Contractors")
             {
-                recruitmentSystem.FilterList(recruitmentSystem.List_Contractors,
+                BookMyTradie.RecruitmentSystem.FilterList(recruitmentSystem.List_Contractors,
                                              ListBox_Contractors,
                                              item => item.Status == "ASSIGNED");
             }
